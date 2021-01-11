@@ -21,11 +21,12 @@
  * @version 1.0
  */
 
-namespace Util\Structure;
+namespace a;
 
 use PDO;
 use Dao\Connect;
 use Util\Structure\StructureDao;
+use Util\Structure\StructureController;
 use Util\Structure\StructureEnv;
 use Util\Structure\StructureFile;
 use Util\Structure\StructureFolder;
@@ -54,7 +55,6 @@ class Structure
 
     /**
      * Lista as tabelas do banco de dados
-     *
      * 
      * @return array
      */
@@ -67,6 +67,22 @@ class Structure
             $tableList[] = $row;
         }
         return $tableList;
+    }
+    
+    /**
+     * Lista as tabelas do banco de dados
+     *
+     * 
+     * @return array
+     */
+    private function abstractTables($table)
+    {
+        $sql_table       = "DESC {$table}";
+        $structure_table = $this->conn->prepare($sql_table);
+        $structure_table->execute();
+        $tableValues     = $structure_table->fetchAll();
+       
+        return $tableValues;
     }
 
 
@@ -83,7 +99,7 @@ class Structure
     {
         $statusFileModel = StructureFile::CreateFile(
             $this->path . "{$this->nameProject}/src/Model/",
-            $filename,
+            ucfirst($filename),
             $content
         );
 
@@ -115,9 +131,15 @@ class Structure
         );
 
         StructureFile::CreateFile(
-            $this->path . "{$this->nameProject}/src/Util/Database/",
+            $this->path . "{$this->nameProject}/src/Util/Crud/",
             "Connect.php",
             StructureEnv::connectDao()
+        );
+
+        StructureFile::CreateFile(
+            $this->path . "{$this->nameProject}/src/Util/Mensage/",
+            "Mensage.php",
+            StructureEnv::Mensage()
         );
     }
 
@@ -129,15 +151,15 @@ class Structure
      * 
      * @param string $path
      * @param string $filename
-     * @param string $content
+     * @param string $nomeObj
      * @return void
      */
-    public function createFileDao($filename, $nomeObj)
+    public function createFileDao($filename, $nomeObj, $namePrimaryKey)
     {
         $statusFileModel = StructureFile::CreateFile(
             $this->path . "{$this->nameProject}/src/Dao/",
-            $filename,
-            StructureDao::modeloDao($nomeObj)
+            ucfirst($filename),
+            StructureDao::modeloDao($nomeObj, $namePrimaryKey)
         );
 
         return $statusFileModel;
@@ -177,18 +199,19 @@ class Structure
      * 
      * @param string $path
      * @param string $filename
-     * @param string $content
+     * @param string $nomeObj
      * @return void
      */
-    public function createFileController($filename, $content)
+    public function createFileController($filename, $nomeObj)
     {
-        $statusFileModel = StructureFile::CreateFile(
+        $statusFileController  = StructureFile::CreateFile(
             $this->path . "{$this->nameProject}/src/Controller/",
-            $filename,
-            $content
+            ucfirst($filename),
+            StructureController::modeloController($nomeObj)
         );
 
-        return $statusFileModel;
+        //return $statusFileController;
+        var_dump($statusFileController);
     }
 
 
@@ -205,6 +228,7 @@ class Structure
             "{$this->nameProject}/",
             "{$this->nameProject}/app",
             "{$this->nameProject}/app/assets",
+            "{$this->nameProject}/app/assets/boot",
             "{$this->nameProject}/app/assets/css",
             "{$this->nameProject}/app/assets/js",
             "{$this->nameProject}/app/assets/img",
@@ -217,7 +241,8 @@ class Structure
             "{$this->nameProject}/src/Dao",
             "{$this->nameProject}/src/Model",
             "{$this->nameProject}/src/Util",
-            "{$this->nameProject}/src/Util/Database",
+            "{$this->nameProject}/src/Util/Crud",
+            "{$this->nameProject}/src/Util/Mensage",
             "{$this->nameProject}/src/test"
         ];
 
@@ -232,12 +257,13 @@ class Structure
 
         
         if($statusStructure){
-            $tableList = $this->abstractDatabese();
+            $tableList = $this->abstractDatabese();            
             for ($i = 0; $i < count($tableList); $i++) {
                 $table = $tableList[$i]["Tables_in_" . BANCO . ""];
                 $name  = $table;
-
-
+                $primaryKey = $this->abstractTables($table);
+                
+                
                 $folderView = new StructureFolder(
                     $this->path . "{$this->nameProject}/app/view/",
                     "{$name}"
@@ -248,8 +274,14 @@ class Structure
 
                 $this->createFileDao(
                     $name."Dao.php",
+                    $name,
+                    $primaryKey[0][0]
+                );
+
+                $this->createFileController(
+                    $name."Controller.php",
                     $name                  
-                );                
+                );
                 
                 $createModel = new StructureModel($this->conn, $table);
                 $this->createFileModel(

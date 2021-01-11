@@ -16,31 +16,31 @@
  * Armazena as configurações de acesso a banco de dados todos os ambientes
  * necessários.
  *
- * @package Util\Structure
+ * @package Pattern
  * @category Configurations
  * @version 1.0
  */
 
-namespace Util\Structure;
+namespace Patterns;
 
-abstract class StructureDao
+class Dao
 {
 
     /**
-     * modelos de Dao para acessar objetos do banco de dados
+     * Dao models to access database objects
      *
-     * @param String $nameClass
-     * @param String $nameTable
+     * @param String $nameObj  Name from calss
+     * @param String $primaryKey primary key from table 
      * @return String
      */
-    static public function modeloDao($nameObj)
+    public function moldDao(string $nameObj, string $primaryKey)
     {
-        
-        return '<?php
-
+        return '
+        <?php
         namespace Dao;
         
-        use Util\Database\Crud;
+        use Util\Crud\Crud;
+        use Model\\'.ucfirst($nameObj).';
         
         class '.ucfirst($nameObj).'Dao
         {
@@ -58,7 +58,6 @@ abstract class StructureDao
             /**
              * Insert data from a table
              *
-             * 
              * @param string $table
              * @param array $dataArr
              * @param bool $debuger
@@ -66,7 +65,7 @@ abstract class StructureDao
              */
             public function create(array $dataArr, bool $debuger = false)
             {
-                $result = $this->crud->create($this->table, $dataArr, $debuger = false);
+                $result = $this->crud->create($this->table, $dataArr, $debuger);
                 return (!$result) ?? "Erro";
             }
         
@@ -74,30 +73,34 @@ abstract class StructureDao
             /**
              * reading data from a table
              *
-             * 
              * @param string $query
              * @param bool $debuger
-             * @return string
+             * @return array|boll
              */   
             public function read(string $query = NULL, bool $debuger = false)
             {
-                $result = $this->crud->read($this->table, $query = NULL, $debuger = false);
-                return (!$result) ?? "Erro";
+                $result = $this->crud->read($this->table, $query, $debuger);
+                while($row = $result->fetchObject('.ucfirst($nameObj).')){
+                    $arrReturn[] = $row;
+                }
+        
+                return $arrReturn;
             }
         
         
             /**
              * update or increment data from a table
              *
-             * 
              * @param array $dataArr
-             * @param string $query
+             * @param int $id
+             * @param string $primaryKey
              * @param bool $debuger
              * @return string
              */   
-            public function update(array $dataArr, string $query = NULL, bool $debuger = false)
+            public function update(array $dataArr, int $id, string $primaryKey = "'.$primaryKey.'", bool $debuger = false)
             {
-                $result = $this->crud->create($this->table, $dataArr, $debuger = false);
+                $query  = "$primaryKey = $id";
+                $result = $this->crud->update($this->table, $dataArr, $query, $debuger);
                 return (!$result) ?? "Erro";
             }
         
@@ -105,17 +108,37 @@ abstract class StructureDao
             /**
              * Delete data from a table
              *
-             * 
-             * @param string $query
+             * @param int $id
+             * @param string $primaryKey
              * @param bool $debuger
              * @return string
              */  
-            public function delete(string $query = NULL, bool $debuger = false)
+            public function delete(int $id, string $primaryKey = "'.$primaryKey.'", bool $debuger = false)
             {
-                $result = $this->crud->delete($this->table, $query = NULL, $debuger = false);
+                $query  = "$primaryKey = $id";
+                $result = $this->crud->delete($this->table, $query, $debuger);
                 return (!$result) ?? "Erro";
             }
-        }
+
+
+            /**
+             * Search the table
+             * 
+             * @param string $value
+             * @return Array
+             */
+            public function search($value): Array
+            {
+                $sql = "SELECT * FROM '.$nameObj.' WHERE id LIKE %{$value}%";
+                $sql .= " or nome LIKE %{$value}%";
+
+                $result = $this->pdo->query($sql);
+                while($row = $result->fetchObject('.ucfirst($nameObj).')){
+                    $arrRetorno[] = $row;
+                }
+
+                return $arrRetorno;
+            }
         ';        
     }
     

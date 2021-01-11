@@ -1,6 +1,6 @@
 <?php
 
-namespace Dao;
+namespace Database;
 
 use PDO;
 use PDOException;
@@ -17,8 +17,10 @@ class Connect
     {
         try {
             return new PDO(
-                'mysql:host=' . HOST . '; dbname=' . BANCO . ';', USUARIO, SENHA
-            );
+                'mysql:host=' . DB_HOST . ';
+                dbname=' . DB_DATABASE . ';', 
+                DB_USERNAME, DB_PASSWORD
+            );            
         } catch (PDOException $exception) {
             throw new PDOException($exception->getMessage());
         }
