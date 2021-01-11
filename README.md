@@ -1,2 +1,2 @@
 # Butterfly
-Sistema para criação de páginas web
+Ferramenta para contrução de arquitetura MVCD (Model, View, Controller e Dao)
