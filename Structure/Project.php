@@ -21,8 +21,7 @@
  * @version 1.0
  */
 
-namespace Structure;
-
+namespace Butterfly\Structure;
 
 class Project
 {
@@ -128,6 +127,14 @@ class Project
     }
 
     /**
+     * @return string
+     */
+    public function getPathApi(): string
+    {
+        return "{$this->getNameProject()}/app/Api/";
+    }
+
+    /**
      * structure of the project to be created
      *
      * @return array
@@ -138,6 +145,8 @@ class Project
             "{$this->getNameProject()}/",
             "{$this->getNameProject()}/app",
             "{$this->getNameProject()}/app/Api",
+            "{$this->getNameProject()}/app/Api/Repository",
+            "{$this->getNameProject()}/app/Api/Service",
             "{$this->getNameProject()}/app/Controller",
             "{$this->getNameProject()}/app/Dao",
             "{$this->getNameProject()}/app/Libs",
@@ -170,12 +179,13 @@ class Project
     public function structureFile(): array
     {
         return $this->structureFolder = [
-            "{$this->getNameProject()}/env.php",
             "{$this->getNameProject()}/autoload.php",
             "{$this->getNameProject()}/.gitignore",
-            "{$this->getNameProject()}/.htaccess",
             "{$this->getNameProject()}/app/composer.json",
+            "{$this->getNameProject()}/app/Controller/HomeController.php",
+            "{$this->getNameProject()}/app/Controller/ErroController.php",
             "{$this->getNameProject()}/resources/View/__layout__/layout.html",
+            "{$this->getNameProject()}/resources/View/.htaccess",
             "{$this->getNameProject()}/resources/View/home",
             "{$this->getNameProject()}/resources/View/home/login.html",
             "{$this->getNameProject()}/resources/View/home/registre.html",

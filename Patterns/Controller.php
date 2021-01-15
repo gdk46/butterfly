@@ -21,7 +21,7 @@
  * @version 1.0
  */
 
-namespace Patterns;
+namespace Butterfly\Patterns;
 
 class Controller
 {
@@ -39,6 +39,7 @@ class Controller
             namespace Controller;
             
             use Dao\\' . ucfirst($nameObj) . 'Dao;
+            use Exception;
             
             class ' . ucfirst($nameObj) . 'Controller 
             {
@@ -48,17 +49,43 @@ class Controller
                 {
                     $this->dao = new ' . ucfirst($nameObj) . 'Dao();
                 }
+                   
+                public function index()
+                {        
+                    try {            
+                        $loader   = new \Twig\Loader\FilesystemLoader("' . $nameObj . '/");
+                        $twig     = new \Twig\Environment($loader);
+                        $template = $twig->load("vizualizar.html");
                         
-                
+
+                        $conteudo = $template->render(array("to funfa"));
+                        echo $conteudo;
+                    } catch (Exception $e) {
+                        echo $e->getMessage();
+                    }
+                }
+
                 /**
                  * Undocumented function
                  *
                  * @param array $arrData
                  * @return void
                  */
-                public function create(array $arrData)
+                // public function create(array $arrData)
+                public function create()
                 {
-                    $this->dao->create($arrData);
+                    try {            
+                        $loader   = new \Twig\Loader\FilesystemLoader("' . $nameObj . '/");
+                        $twig     = new \Twig\Environment($loader);
+                        $template = $twig->load("criar.html");
+                        
+
+                        $conteudo = $template->render(array("to funfa"));
+                        echo $conteudo;
+                    } catch (Exception $e) {
+                        echo $e->getMessage();
+                    }
+                    // $this->dao->create($arrData);
                 }
 
                 /**
@@ -94,7 +121,6 @@ class Controller
                 {
                     $this->dao->delete($id);
                 }
-            
             }
         ';
     }

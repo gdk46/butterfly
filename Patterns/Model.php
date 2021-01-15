@@ -19,11 +19,10 @@
  * @version 1.0
  */
 
-namespace Patterns;
+namespace Butterfly\Patterns;
 
-use DataType\DataType;
-use PDO;
-use Sanitize\Sanitize;
+use Butterfly\DataType\DataType;
+use Butterfly\Sanitize\Sanitize;
 
 class Model
 {

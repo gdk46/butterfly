@@ -21,9 +21,9 @@
  * @version 1.0
  */
 
-namespace Patterns;
+namespace Butterfly\Patterns;
 
-use Sanitize\Sanitize;
+use Butterfly\Sanitize\Sanitize;
 
 class View
 {

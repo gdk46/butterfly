@@ -23,7 +23,7 @@
  */
 
 
-namespace File;
+namespace Butterfly\File;
 
 class File
 {

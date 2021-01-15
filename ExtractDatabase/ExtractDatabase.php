@@ -1,6 +1,6 @@
 <?php
 
-namespace ExtractDatabase;
+namespace Butterfly\ExtractDatabase;
 
 use PDO;
 

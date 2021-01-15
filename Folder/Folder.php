@@ -21,7 +21,7 @@
  */
 
 
-namespace Folder;
+namespace Butterfly\Folder;
 
 class Folder
 {
