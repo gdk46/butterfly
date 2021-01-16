@@ -44,10 +44,12 @@ abstract class Mold
     public const COMPOSER = '
         {
             "name": "user/app",
+            "license": "MIT",
+            "description": "",
             "authors": [
                 {
                     "name": "",
-                    "email": ""
+                    "email": "Test@gmail.com"
                 }
             ],
             "require": {
