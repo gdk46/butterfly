@@ -1,6 +1,6 @@
 <?php
 
-namespace Sanitize;
+namespace Butterfly\Sanitize;
 
 abstract class Sanitize
 {

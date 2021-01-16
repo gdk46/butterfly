@@ -23,7 +23,7 @@
  */
 
 
-namespace File;
+namespace Butterfly\File;
 
 class File
 {
@@ -68,7 +68,7 @@ class File
                 $folder_replace = str_replace("/", "\\", $file);
                 $status = fopen($folder_replace, 'w');
 
-                $console[] = [
+                $console[] .= [
                     "{$file}" => "{$status}",
                 ];
             }
@@ -84,22 +84,21 @@ class File
      * @param array arrContent Array white content and route from file
      * @return bool
      */
-    public function writeInFile(array $arrContent)//: array
+    public function writeInFile(array $arrContent): bool
     {
         foreach ($arrContent as $path => $content) {
-            $console = [];
             $route = $this->getPath().$path;
 
             if (!file_exists($route)){
-                $status = (file_put_contents($route, trim($content))) ?? false;
-                
-                $console[] = [
-                    "{$route}" => "{$status}",
-                ];
+                $status = (bool) (file_put_contents($route, trim($content))) ? true : false;
+
+                if ($status) {
+                    return $status;            
+                }
             }
         }
-
-        return $console;
+        
+        return false;
     }
 
     /**
@@ -108,21 +107,20 @@ class File
      * @param array arrContent Array white content and route from file
      * @return bool
      */
-    public function rewrittenInFile(array $arrContent)//: array
-    {
+    public function rewrittenInFile(array $arrContent): bool
+    {        
         foreach ($arrContent as $path => $content) {
-            $console = [];
             $route = $this->getPath().$path;
-
+                 
             if (file_exists($route)){
-                $status = (file_put_contents($route, trim($content))) ?? false;
-                
-                $console[] = [
-                    "{$route}" => "{$status}",
-                ];
+                $status = (bool) (file_put_contents($route, trim($content))) ? true : false;
+
+                if ($status) {
+                    return $status;            
+                }
             }
         }
-
-        return $console;
+        
+        return false;
     }
 }

@@ -22,7 +22,7 @@
  * @version 1.0
  */
 
-namespace DataType;
+namespace Butterfly\DataType;
 
 
 abstract class DataType

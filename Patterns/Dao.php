@@ -21,7 +21,7 @@
  * @version 1.0
  */
 
-namespace Patterns;
+namespace Butterfly\Patterns;
 
 class Dao
 {
