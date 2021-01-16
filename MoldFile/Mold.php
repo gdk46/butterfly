@@ -25,6 +25,7 @@ abstract class Mold
             for ($i = 0; $i < count($base_dir); $i++) {
 
                 // substitua \\ por / no index do directorio base  
+
                 $class = str_replace("\\\", DIRECTORY_SEPARATOR, $base_dir[$i]);
 
                 // debugger
