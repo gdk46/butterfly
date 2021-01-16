@@ -68,7 +68,7 @@ class File
                 $folder_replace = str_replace("/", "\\", $file);
                 $status = fopen($folder_replace, 'w');
 
-                $console[] .= [
+                $console[] = [
                     "{$file}" => "{$status}",
                 ];
             }
