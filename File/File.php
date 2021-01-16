@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Gleisson Neves - Copyright (c) Gleisson Neves (https://github.com/gdk46)
  *
@@ -17,8 +16,8 @@
  * descrição
  * 
  *
- * @package 
- * @category 
+ * @package Butterfly\File
+ * @category create
  * @version 1.0
  */
 
@@ -53,7 +52,7 @@ class File
     }
 
     /**
-     * Create file
+     * Create one file
      * 
      * @param string $filename
      * @return bool
@@ -79,7 +78,7 @@ class File
 
 
     /**
-     * Undocumented function
+     * Write in file
      *
      * @param array arrContent Array white content and route from file
      * @return bool
@@ -102,7 +101,7 @@ class File
     }
 
     /**
-     * Undocumented function
+     * rewrites a file
      *
      * @param array arrContent Array white content and route from file
      * @return bool
@@ -116,7 +115,7 @@ class File
                 $status = (bool) (file_put_contents($route, trim($content))) ? true : false;
 
                 if ($status) {
-                    return $status;            
+                    return $status;
                 }
             }
         }
