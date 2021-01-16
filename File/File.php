@@ -90,14 +90,10 @@ class File
 
             if (!file_exists($route)){
                 $status = (bool) (file_put_contents($route, trim($content))) ? true : false;
-
-                if ($status) {
-                    return $status;            
-                }
             }
         }
         
-        return false;
+        return ($status) ?? false;
     }
 
     /**
@@ -113,13 +109,9 @@ class File
                  
             if (file_exists($route)){
                 $status = (bool) (file_put_contents($route, trim($content))) ? true : false;
-
-                if ($status) {
-                    return $status;
-                }
             }
         }
         
-        return false;
+        return ($status) ?? false;
     }
 }
