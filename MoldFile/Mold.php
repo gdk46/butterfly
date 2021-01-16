@@ -19,6 +19,8 @@ abstract class Mold
             // directórios especificos para requisição dos namespace
             $base_dir = [
                 __DIR__ . DIRECTORY_SEPARATOR . "app" . DIRECTORY_SEPARATOR . $class . ".php",
+                __DIR__ . DIRECTORY_SEPARATOR . "app\Util" . DIRECTORY_SEPARATOR . $class . ".php",
+                __DIR__ . DIRECTORY_SEPARATOR . "app\Libs" . DIRECTORY_SEPARATOR . $class . ".php",
             ];
 
             // use a quantidade de item do array como referencia, procure
