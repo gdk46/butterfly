@@ -39,7 +39,7 @@ class Dao
         <?php
         namespace Dao;
         
-        use Util\Crud\Crud;
+        use Crud\Database\Crud;
         use Model\\'.ucfirst($nameObj).';
         
         class '.ucfirst($nameObj).'Dao
@@ -79,8 +79,8 @@ class Dao
              */   
             public function read(string $query = NULL, bool $debuger = false)
             {
-                $result = $this->crud->read($this->table, $query, $debuger);
-                while($row = $result->fetchObject('.ucfirst($nameObj).')){
+                $result = $this->crud->getConnect()->read($this->table, $query, $debuger);
+                while($row = $result->fetchObject("'.ucfirst($nameObj).'")){
                     $arrReturn[] = $row;
                 }
         
@@ -100,7 +100,7 @@ class Dao
             public function update(array $dataArr, int $id, string $primaryKey = "'.$primaryKey.'", bool $debuger = false)
             {
                 $query  = "$primaryKey = $id";
-                $result = $this->crud->update($this->table, $dataArr, $query, $debuger);
+                $result = $this->crud->getConnect()->update($this->table, $dataArr, $query, $debuger);
                 return (!$result) ?? "Erro";
             }
         
@@ -116,7 +116,7 @@ class Dao
             public function delete(int $id, string $primaryKey = "'.$primaryKey.'", bool $debuger = false)
             {
                 $query  = "$primaryKey = $id";
-                $result = $this->crud->delete($this->table, $query, $debuger);
+                $result = $this->crud->getConnect()->delete($this->table, $query, $debuger);
                 return (!$result) ?? "Erro";
             }
 
@@ -133,12 +133,13 @@ class Dao
                 $sql .= " or nome LIKE %{$value}%";
 
                 $result = $this->pdo->query($sql);
-                while($row = $result->fetchObject('.ucfirst($nameObj).')){
+                while($row = $result->fetchObject("'.ucfirst($nameObj).'")){
                     $arrRetorno[] = $row;
                 }
 
                 return $arrRetorno;
             }
+        }
         ';        
     }
     
