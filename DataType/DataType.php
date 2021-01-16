@@ -47,9 +47,6 @@ abstract class DataType
                 break;
 
             case 'double':
-                return "double";
-                break;
-
             case 'decimal':
             case 'real':
                 return "float";
