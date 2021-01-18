@@ -1,4 +1,6 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/gdk46/privado/4c5128b8c938b6f6a3c5b83f24f10e15bcfedeb3/butterfly/Group%201.svg?token=AMZ23B6GBZQQ6XBQ3HKDM4TAAXHN6" width="500"></a></p>
+<p align="center">
+<img src="https://raw.githubusercontent.com/gdk46/privado/4c5128b8c938b6f6a3c5b83f24f10e15bcfedeb3/butterfly/Group%201.svg?token=AMZ23B7YRYJAXB5QDQYDNJLAAXQIU" width="500">
+</p>
 
 <p align="center">
     <img alt="GitHub" src="https://img.shields.io/github/license/gdk46/Butterfly?color=blueviolet">
