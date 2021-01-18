@@ -185,6 +185,7 @@ class Project
             "{$this->getNameProject()}/app/Controller/HomeController.php",
             "{$this->getNameProject()}/app/Controller/ErroController.php",
             "{$this->getNameProject()}/resources/View/__layout__/layout.html",
+            "{$this->getNameProject()}/resources/View/__layout__/admin.html",
             "{$this->getNameProject()}/resources/View/.htaccess",
             "{$this->getNameProject()}/resources/View/home",
             "{$this->getNameProject()}/resources/View/home/login.html",
