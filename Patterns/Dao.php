@@ -33,7 +33,7 @@ class Dao
      * @param String $primaryKey primary key from table 
      * @return String
      */
-    public function moldDao(string $nameObj, string $primaryKey)
+    public function moldDao(string $nameObj, string $primaryKey = "id")
     {
         return '
         <?php
