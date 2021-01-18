@@ -22,14 +22,14 @@ Projeto/
 │   │   └── Service
 │   │
 │   ├── Controller
-│   │   └── (Regra de negócio dos Modelos)
+│   │   └── *
 │   │
 │   ├── Dao
-│   │   └── (Dados dos modelos das entidades)
+│   │   └── *
 │   │
 │   ├── Libs
 │   ├── Model
-│   │   └── (Modelos das entidades)
+│   │   └── *
 │   │
 │   ├── Util
 │   │   └── Crud
@@ -59,7 +59,7 @@ Projeto/
 │       │    ├── admin.html
 │       │    └── layout.html
 │       │
-│       ├── (* gera de acordo com as entidades do banco)
+│       ├── *
 │       │    ├── criar.html
 │       │    └── visualizar.html
 │       │
