@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/gdk46/privado/4c5128b8c938b6f6a3c5b83f24f10e15bcfedeb3/butterfly/Group%201.svg?token=AMZ23B7YRYJAXB5QDQYDNJLAAXQIU" width="500">
+<img src="https://raw.githubusercontent.com/gdk46/Butterfly/0d126c0eb9fbbe56d6eb19ce81ba1322fb441a11/docs/Group%201.svg" width="500">
 </p>
 
 <p align="center">
