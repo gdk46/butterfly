@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/gdk46/privado/4c5128b8c938b6f6a3c5b83f24f10e15bcfedeb3/butterfly/Group%201.svg?token=AMZ23B7YRYJAXB5QDQYDNJLAAXQIU" width="500">
+<img src="https://raw.githubusercontent.com/gdk46/Butterfly/0d126c0eb9fbbe56d6eb19ce81ba1322fb441a11/docs/Group%201.svg" width="500">
 </p>
 
 <p align="center">
@@ -9,7 +9,7 @@
 
 ## Mais sobre a Butterfly
 Desenvolvido para agilizar na construção de projetos com arquitetura MVC + Dao, Butterfly utiliza o método
-top-down, onde o desenvolvedor é obrigado a construir sua solução a partir banco de dados da sua aplicação, pós estruturado,
+top-down, onde o desenvolvedor é obrigado a construir sua solução a partir do banco de dados da sua aplicação, pós estruturado,
 a Butterfly gera uma estrutura de pastas e arquivos necessários para um projeto, além disso, possibilita o trabalho com construção APIs REST.
 
 ## Estrutura padrão gerada
@@ -19,7 +19,9 @@ Projeto/
 │   │
 │   ├── Api
 │   │   ├── Repository
+│   │   │   └── *
 │   │   └── Service
+│   │       └── *
 │   │
 │   ├── Controller
 │   │   └── *
@@ -28,15 +30,18 @@ Projeto/
 │   │   └── *
 │   │
 │   ├── Libs
+│   │   ├── ConnectDb
+│   │   │   └── Database
+│   │   │        ├── Connect.php
+│   │   │        └── SetUpConnect.php
+│   │   └── Crud
+│   │       ├── Config
+│   │       └── Database
+│   │            └── Crud.php
 │   ├── Model
 │   │   └── *
 │   │
 │   ├── Util
-│   │   └── Crud
-│   │       ├── Config
-│   │       └── Database
-│   │            ├── Connect.php
-│   │            └── Crud.php
 │   ├── Vendor
 │   └── composer.json
 │
