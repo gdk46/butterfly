@@ -184,6 +184,7 @@ class Project
             "{$this->getNameProject()}/app/composer.json",
             "{$this->getNameProject()}/app/Controller/HomeController.php",
             "{$this->getNameProject()}/app/Controller/ErroController.php",
+            "{$this->getNameProject()}/Environment/Config/Env.php",
             "{$this->getNameProject()}/resources/View/__layout__/layout.html",
             "{$this->getNameProject()}/resources/View/__layout__/admin.html",
             "{$this->getNameProject()}/resources/View/.htaccess",
