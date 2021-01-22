@@ -85,6 +85,7 @@ class NewApp
         $this->file->rewrittenInFile([
             "{$name}/autoload.php" => Mold::AUTOLOAD,
             "{$name}/app/composer.json" => Mold::COMPOSER,
+            "{$name}/Environment/Config/Env.php" => Mold::ENV,
             "{$name}/.gitignore" => Mold::GITIGNORE,
             "{$name}/resources/View/.htaccess" => Mold::HTACCESS,
         ]);
