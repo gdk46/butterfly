@@ -38,7 +38,9 @@ class Dao
         return '
         <?php
         namespace Dao;
-        
+
+        use Config\Env;
+        use ConnectDb\Database\Connect;
         use Crud\Database\Crud;
         use Model\\'.ucfirst($nameObj).';
         
@@ -50,7 +52,8 @@ class Dao
             
             public function __construct()
             {
-                $this->crud = new Crud();
+                $this->conn = new Connect(Env::DB_FEATURE);
+                $this->crud = new Crud($this->conn->getConnect());
                 $this->table = "'.$nameObj.'";
             }
         
@@ -79,8 +82,8 @@ class Dao
              */   
             public function read(string $query = NULL, bool $debuger = false)
             {
-                $result = $this->crud->getConnect()->read($this->table, $query, $debuger);
-                while($row = $result->fetchObject("'.ucfirst($nameObj).'")){
+                $this->crud->read($this->table, $query, $debuger);
+                while($row = $this->crud->read->fetchObject("'.ucfirst($nameObj).'")){
                     $arrReturn[] = $row;
                 }
         
@@ -100,7 +103,7 @@ class Dao
             public function update(array $dataArr, int $id, string $primaryKey = "'.$primaryKey.'", bool $debuger = false)
             {
                 $query  = "$primaryKey = $id";
-                $result = $this->crud->getConnect()->update($this->table, $dataArr, $query, $debuger);
+                $result = $this->crud->update($this->table, $dataArr, $query, $debuger);
                 return (!$result) ?? "Erro";
             }
         
@@ -116,7 +119,7 @@ class Dao
             public function delete(int $id, string $primaryKey = "'.$primaryKey.'", bool $debuger = false)
             {
                 $query  = "$primaryKey = $id";
-                $result = $this->crud->getConnect()->delete($this->table, $query, $debuger);
+                $result = $this->crud->delete($this->table, $query, $debuger);
                 return (!$result) ?? "Erro";
             }
 
@@ -127,13 +130,13 @@ class Dao
              * @param string $value
              * @return Array
              */
-            public function search($value): Array
+            public function search($value): array
             {
-                $sql = "SELECT * FROM '.$nameObj.' WHERE id LIKE %{$value}%";
+                $sql = "SELECT * FROM aluno WHERE id LIKE %{$value}%";
                 $sql .= " or nome LIKE %{$value}%";
 
-                $result = $this->pdo->query($sql);
-                while($row = $result->fetchObject("'.ucfirst($nameObj).'")){
+                $this->crud->read($this->table, $sql);
+                while ($row = $this->crud->read->fetchObject("Aluno")) {
                     $arrRetorno[] = $row;
                 }
 
