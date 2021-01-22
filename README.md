@@ -9,7 +9,7 @@
 
 ## Mais sobre a Butterfly
 Desenvolvido para agilizar na construção de projetos com arquitetura MVC + Dao, Butterfly utiliza o método
-top-down, onde o desenvolvedor é obrigado a construir sua solução a partir banco de dados da sua aplicação, pós estruturado,
+top-down, onde o desenvolvedor é obrigado a construir sua solução a partir do banco de dados da sua aplicação, pós estruturado,
 a Butterfly gera uma estrutura de pastas e arquivos necessários para um projeto, além disso, possibilita o trabalho com construção APIs REST.
 
 ## Estrutura padrão gerada
@@ -19,7 +19,9 @@ Projeto/
 │   │
 │   ├── Api
 │   │   ├── Repository
+│   │   │   └── *
 │   │   └── Service
+│   │       └── *
 │   │
 │   ├── Controller
 │   │   └── *
@@ -28,15 +30,18 @@ Projeto/
 │   │   └── *
 │   │
 │   ├── Libs
+│   │   ├── ConnectDb
+│   │   │   └── Database
+│   │   │        ├── Connect.php
+│   │   │        └── SetUpConnect.php
+│   │   └── Crud
+│   │       ├── Config
+│   │       └── Database
+│   │            └── Crud.php
 │   ├── Model
 │   │   └── *
 │   │
 │   ├── Util
-│   │   └── Crud
-│   │       ├── Config
-│   │       └── Database
-│   │            ├── Connect.php
-│   │            └── Crud.php
 │   ├── Vendor
 │   └── composer.json
 │
