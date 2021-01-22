@@ -19,6 +19,7 @@ abstract class Mold
             // directórios especificos para requisição dos namespace
             $base_dir = [
                 __DIR__ . DIRECTORY_SEPARATOR . "app" . DIRECTORY_SEPARATOR . $class . ".php",
+                __DIR__ . DIRECTORY_SEPARATOR . "Environment" . DIRECTORY_SEPARATOR . $class . ".php",
                 __DIR__ . DIRECTORY_SEPARATOR . "app\Util" . DIRECTORY_SEPARATOR . $class . ".php",
                 __DIR__ . DIRECTORY_SEPARATOR . "app\Libs" . DIRECTORY_SEPARATOR . $class . ".php",
             ];
@@ -63,16 +64,19 @@ abstract class Mold
     public const ENV = '
         <?php
 
-        namespace Environment\Config;
+        namespace Config;
         
-        abstract class Env
+        abstract class Env 
         {
-            public const DB_CONNECTION = "mysql";
-            public const DB_HOST = "127.0.0.1";
-            public const DB_PORT = "3306";
-            public const DB_DATABASE = "test";
-            public const DB_USERNAME = "root";
-            public const DB_PASSWORD = "";
+            public const DB_FEATURE = [
+                "db_drive" => "mysql",
+                "db_port" => 3306,
+                "db_name" => "test",
+                "db_host" => "localhost",
+                "db_username" => "root",
+                "db_passwd" => "",
+                "db_charset" => "utf8",
+            ];
         }
     ';
 
