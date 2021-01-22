@@ -49,7 +49,12 @@ class Controller
                 {
                     $this->dao = new ' . ucfirst($nameObj) . 'Dao();
                 }
-                   
+                
+                /**
+                 * Page
+                 *
+                 * @return void
+                 */
                 public function index()
                 {        
                     try {            
@@ -66,60 +71,73 @@ class Controller
                 }
 
                 /**
-                 * Undocumented function
+                 * Page
                  *
-                 * @param array $arrData
                  * @return void
                  */
-                // public function create(array $arrData)
+                public function change($id)
+                {
+                    $loader = new \Twig\Loader\FilesystemLoader("' . $nameObj . '/");
+                    $twig = new \Twig\Environment($loader);
+                    $template = $twig->load("update.html");
+
+                    $arrDao = $this->dao->read("WHERE id = {$id}");
+
+                    $conteudo = $template->render($arrDao);
+                    echo $conteudo;
+                }
+
+                /**
+                 * action
+                 * 
+                 * @return void
+                 */
                 public function create()
                 {
-                    try {            
-                        $loader   = new \Twig\Loader\FilesystemLoader("' . $nameObj . '/");
-                        $twig     = new \Twig\Environment($loader);
-                        $template = $twig->load("criar.html");
-                        
-
-                        $conteudo = $template->render(array("to funfa"));
-                        echo $conteudo;
+                    try {
+                        $arrDao = $this->dao->create($_POST);
                     } catch (Exception $e) {
                         echo $e->getMessage();
                     }
-                    // $this->dao->create($arrData);
                 }
 
                 /**
-                 * Undocumented function
-                 *
-                 * @param string $query
+                 * action
+                 * 
                  * @return void
                  */
-                public function read(string $query = NULL)
+                public function read()
                 {
-                    $this->dao->read($query);
+                    try {
+                        $arrDao = $this->dao->read();
+                    } catch (Exception $e) {
+                        echo $e->getMessage();
+                    }
                 }
 
                 /**
-                 * Undocumented function
-                 *
-                 * @param int $id
-                 * @param array $arrData
+                 * action
+                 * 
                  * @return void
                  */
-                public function update(array $arrData, int $id)
+                public function update()
                 {
-                    $this->dao->update($arrData, $id);
+                    try {
+                        $arrDao = $this->dao->update($_POST);
+                    } catch (Exception $e) {
+                        echo $e->getMessage();
+                    }
+                    
                 }
 
                 /**
-                 * delete element from table of  
-                 *
-                 * @param int $id
+                 * action
+                 * 
                  * @return void
                  */
-                public function delete(int $id)
+                public function delete($id)
                 {
-                    $this->dao->delete($id);
+                    $arrDao = $this->dao->delete($id);
                 }
             }
         ';
